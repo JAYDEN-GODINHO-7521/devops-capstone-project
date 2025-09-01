@@ -1,5 +1,5 @@
 name: CI Build
-on: 
+on:
   push:
     branches:
       - main
@@ -15,7 +15,7 @@ jobs:
       postgres:
         image: postgres:alpine
         ports: 
-        - 5432:5432
+          - 5432:5432
         env:
           POSTGRES_PASSWORD: pgs3cr3t
           POSTGRES_DB: testdb
@@ -39,7 +39,6 @@ jobs:
           flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run unit tests with Nose
-        run: |
-          nosetests -v --with-spec --spec-color --with-coverage --cover-package=service
+        run: nosetests
         env:
           DATABASE_URL: "postgresql://postgres:pgs3cr3t@postgres:5432/testdb"
